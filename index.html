@@ -99,6 +99,22 @@
             0% { height: 4px; }
             100% { height: 16px; }
         }
+
+        /* Continuous subtle float animation for baby characters */
+        .float-baby {
+            animation: floatSlow 4s ease-in-out infinite alternate;
+        }
+        .float-baby-reverse {
+            animation: floatSlowRev 4s ease-in-out infinite alternate;
+        }
+        @keyframes floatSlow {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-8px) rotate(2deg); }
+        }
+        @keyframes floatSlowRev {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-8px) rotate(-2deg); }
+        }
     </style>
 </head>
 <body class="min-h-screen text-slate-700 pb-28 relative overflow-x-hidden">
@@ -121,7 +137,7 @@
 
     <header class="relative text-center pt-8 pb-4 px-4 max-w-lg mx-auto">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/90 border border-purple-200/80 rounded-full shadow-sm text-xs font-bold text-purple-900 mb-3">
-            <span>✨</span> Un pequeño secreto está por revelarse<span>🍼</span>
+            <span>✨</span> Un pequeño secreto está por revelarse <span>🍼</span>
         </div>
 
         <h1 class="font-serif-heading text-4xl sm:text-5xl font-bold tracking-tight text-slate-800 mb-1">
@@ -132,7 +148,8 @@
         </p>
 
         <div class="flex justify-center items-center gap-3 my-2">
-            <div class="floating bg-white/90 p-2.5 rounded-3xl shadow-md border border-sky-200 text-center w-36 overflow-hidden">
+            <!-- Baby Boy Illustration -->
+            <div class="float-baby bg-white/90 p-2.5 rounded-3xl shadow-md border border-sky-200 text-center w-36 overflow-hidden">
                 <div class="w-28 h-36 mx-auto flex items-center justify-center">
                     <svg viewBox="0 0 100 125" class="w-full h-full drop-shadow-md">
                         <defs>
@@ -185,7 +202,8 @@
                 &
             </div>
 
-            <div class="floating-slow bg-white/90 p-2.5 rounded-3xl shadow-md border border-pink-200 text-center w-36 overflow-hidden">
+            <!-- Baby Girl Illustration -->
+            <div class="float-baby-reverse bg-white/90 p-2.5 rounded-3xl shadow-md border border-pink-200 text-center w-36 overflow-hidden">
                 <div class="w-28 h-36 mx-auto flex items-center justify-center">
                     <svg viewBox="0 0 100 125" class="w-full h-full drop-shadow-md">
                         <defs>
@@ -274,10 +292,18 @@
             <div class="inline-block px-3.5 py-1 bg-purple-100/80 text-purple-900 text-[11px] font-bold rounded-full mb-2">
                 ✨ ¿Qué presiente tu corazón? ✨
             </div>
-            <h2 class="font-serif-heading text-2xl font-bold text-slate-800 mb-1">
+            <h2 class="font-serif-heading text-2xl font-bold text-slate-800 mb-2">
                 ¡Vota por tu intuición!
             </h2>
-            <p class="text-xs text-slate-500 mb-5"> (#TeamNiño) o (#TeamNiña)</p>
+
+            <!-- Custom requested message box -->
+            <div class="bg-gradient-to-r from-amber-50 via-purple-50 to-pink-50 border border-purple-200/80 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 leading-relaxed mb-5 shadow-sm text-center">
+                <p class="font-bold text-indigo-900 text-sm mb-1">¡Ayúdanos a adivinar!</p>
+                <p class="text-slate-600 mb-2">
+                    Si crees que será <span class="font-bold text-sky-600">Niño 💙</span>, tu misión es traer un paquete de pañales. Pero si apuestas a que será <span class="font-bold text-pink-600">Niña 🩷</span>, prepárate para los abrazos y trae un paquete de toallitas húmedas.
+                </p>
+                <p class="font-extrabold text-purple-900 text-sm tracking-wide">¿A qué equipo le vas?</p>
+            </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <button onclick="vote('boy')" class="group relative bg-gradient-to-b from-sky-50 via-sky-100/60 to-blue-100 hover:from-sky-100 hover:to-blue-200 text-slate-800 p-4 rounded-3xl transition-all duration-300 transform active:scale-95 shadow-md flex flex-col items-center border-2 border-sky-300 overflow-hidden">
@@ -305,7 +331,7 @@
                     </div>
 
                     <span class="font-display font-bold text-base text-sky-800">#TeamNiño</span>
-                    <span class="text-[11px] text-sky-600 font-semibold mb-2">Bebé Niño 💙</span>
+                    <span class="text-[11px] text-sky-600 font-semibold mb-2">Traer Pañales 💙</span>
                     
                     <span id="boy-count" class="text-xs font-bold bg-white px-3 py-1 rounded-full text-sky-700 shadow-sm border border-sky-200">
                         0 votos
@@ -338,7 +364,7 @@
                     </div>
 
                     <span class="font-display font-bold text-base text-pink-800">#TeamNiña</span>
-                    <span class="text-[11px] text-pink-600 font-semibold mb-2">Bebé Niña 🩷</span>
+                    <span class="text-[11px] text-pink-600 font-semibold mb-2">Traer Toallitas 🩷</span>
 
                     <span id="girl-count" class="text-xs font-bold bg-white px-3 py-1 rounded-full text-pink-700 shadow-sm border border-pink-200">
                         0 votos
@@ -354,18 +380,18 @@
                 <span class="text-lg">🩷</span>
             </div>
 
-            <div class="relative group mt-2">
+            <div id="carousel-wrapper" class="relative group mt-2">
                 <div class="stitch-glow relative rounded-2xl overflow-hidden border-4 border-blue-200/90 shadow-md bg-slate-900 aspect-[4/3] flex items-center justify-center">
                     <img id="carousel-img" 
                          src="https://lh3.googleusercontent.com/d/1sQvWxWuqZBG7tQxqv2eLkYIE5BAGYTCG" 
                          alt="Fotografía del Bebé" 
-                         class="w-full h-full object-contain bg-slate-950 transition-all duration-500">
+                         class="w-full h-full object-contain bg-slate-950 transition-all duration-700 opacity-100">
                 </div>
 
-                <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-800 p-2.5 rounded-full shadow-lg border border-blue-100 transition-all z-10">
+                <button onclick="prevSlideManual()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-800 p-2.5 rounded-full shadow-lg border border-blue-100 transition-all z-10 active:scale-90">
                     <i class="fa-solid fa-chevron-left text-xs"></i>
                 </button>
-                <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-800 p-2.5 rounded-full shadow-lg border border-blue-100 transition-all z-10">
+                <button onclick="nextSlideManual()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-slate-800 p-2.5 rounded-full shadow-lg border border-blue-100 transition-all z-10 active:scale-90">
                     <i class="fa-solid fa-chevron-right text-xs"></i>
                 </button>
             </div>
@@ -500,17 +526,24 @@
         ];
 
         let currentSlide = 0;
+        let autoSlideTimer = null;
 
         function updateCarousel() {
             const imgEl = document.getElementById('carousel-img');
             if (!imgEl) return;
+
+            // Fade animation
+            imgEl.classList.add('opacity-30');
             
-            imgEl.src = galleryImages[currentSlide];
-            imgEl.onerror = function() {
-                this.onerror = null;
-                this.src = fallbackImages[currentSlide];
-            };
-            
+            setTimeout(() => {
+                imgEl.src = galleryImages[currentSlide];
+                imgEl.onerror = function() {
+                    this.onerror = null;
+                    this.src = fallbackImages[currentSlide];
+                };
+                imgEl.classList.remove('opacity-30');
+            }, 150);
+
             renderThumbnails();
         }
 
@@ -527,6 +560,30 @@
         function setSlide(index) {
             currentSlide = index;
             updateCarousel();
+            restartAutoSlide();
+        }
+
+        function nextSlideManual() {
+            nextSlide();
+            restartAutoSlide();
+        }
+
+        function prevSlideManual() {
+            prevSlide();
+            restartAutoSlide();
+        }
+
+        function startAutoSlide() {
+            if (autoSlideTimer) clearInterval(autoSlideTimer);
+            // Rotates images automatically every 3.5 seconds
+            autoSlideTimer = setInterval(() => {
+                nextSlide();
+            }, 3500);
+        }
+
+        function restartAutoSlide() {
+            if (autoSlideTimer) clearInterval(autoSlideTimer);
+            startAutoSlide();
         }
 
         function renderThumbnails() {
@@ -717,7 +774,7 @@
         document.getElementById('whatsapp-btn').href = `https://wa.me/${phoneNumber}?text=${message}`;
 
         let boyVotes = parseInt(localStorage.getItem('boyVotes') || '19');
-        let girlVotes = parseInt(localStorage.getItem('girlVotes') || '23');
+        let girlVotes = parseInt(localStorage.getItem('girlVotes') || '37');
 
         function updateVotesUI() {
             document.getElementById('boy-count').innerText = `${boyVotes} votos`;
@@ -771,8 +828,20 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             updateCarousel();
+            startAutoSlide();
             setInterval(updateCountdown, 1000);
             updateCountdown();
+
+            // Pause autoplay on carousel hover for better user experience
+            const wrapper = document.getElementById('carousel-wrapper');
+            if (wrapper) {
+                wrapper.addEventListener('mouseenter', () => {
+                    if (autoSlideTimer) clearInterval(autoSlideTimer);
+                });
+                wrapper.addEventListener('mouseleave', () => {
+                    startAutoSlide();
+                });
+            }
         });
     </script>
 </body>
